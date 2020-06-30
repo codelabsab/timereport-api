@@ -255,7 +255,7 @@ def list_all_locks_by_date(event_date):
     :return: list of locks for date
     """
     locks = []
-    for lock in LockTable.scan(LockTable.event_date == event_date):
+    for lock in LockTable.scan(LockTable.event_date.startswith(event_date)):
         locks.append(lock.attribute_values)
     return json.dumps(locks)
 
