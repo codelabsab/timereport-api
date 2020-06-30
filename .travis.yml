@@ -1,6 +1,6 @@
 language: python
 python:
-- '3.6'
+- '3.8'
 install:
   - pip install -r requirements.txt
 env:
@@ -25,6 +25,6 @@ jobs:
     - stage: Deploy to prod
       on:
         branch: master
-      script: 
+      script:
         - if [ -z "$TRAVIS_TAG" ];then echo "Skipping deploying to prod because of missing tag" && exit 0; fi
         - chalice deploy --stage prod
