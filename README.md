@@ -70,14 +70,21 @@ DELETE /locks/dates/<date>     # delete all locks by date
 
 ### prerequisite
 - Docker (to run amazon/dynamodb-local)
-- packages in requirements.txt
+- packages in requirements.txt OR `pipenv install`
+- edit .chalice/config.json env variables and add:
+```json
+  "environment_variables": {
+    "AWS_ACCESS_KEY_ID": "dummy",
+    "AWS_SECRET_ACCESS_KEY": "dummy"
+  },
+```
 
 To start a local dynamodb and chalice:
 ```
 $ make dynamo
 $ make chalice
 ```
-Now you should be able to try the API on http://localhost:8010
+Now you should be able to try the API on http://localhost:8010 or run the tests `pipenv run pytest`
 
 To stop and cleanup:
 ```
@@ -102,6 +109,7 @@ __note__: This requires that you have setup the credentials for AWS
 `chalice deploy --stage prod`
 
 ### Run unit tests
+
 #### prerequisite
 Install the packages (use pipenv)
 __IMPORTANT!__ : Make sure you have started your local development environment
