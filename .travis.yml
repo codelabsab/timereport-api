@@ -14,8 +14,8 @@ notifications:
 
 stages:
   - name: Deploy to dev
-    if: type = push AND branch = master
   - name: Deploy to prod
+    if: type = push AND branch = master
 
 jobs:
   include:
@@ -26,5 +26,4 @@ jobs:
       on:
         branch: master
       script:
-        - if [ -z "$TRAVIS_TAG" ];then echo "Skipping deploying to prod because of missing tag" && exit 0; fi
         - chalice deploy --stage prod
