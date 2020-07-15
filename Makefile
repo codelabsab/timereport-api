@@ -29,6 +29,9 @@ restart:
 chalice:
 	chalice local --port $(API_PORT) --no-autoreload
 
+ci-server:
+	sh -c "chalice local --port $(API_PORT) --no-autoreload &"
+
 
 default: run
 clean: stop
