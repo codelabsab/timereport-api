@@ -63,6 +63,11 @@ def test_create_event():
     assert r.status_code == 200
 
 
+def test_create_multilpe_events():
+    r = create_event(event_data)
+    assert r.status_code == 200
+
+
 def test_create_lock():
     lock = lock_data[0]
     r = create_lock(lock)
