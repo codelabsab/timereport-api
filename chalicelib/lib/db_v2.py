@@ -202,14 +202,25 @@ def create_event_v2(events):
     """
     if isinstance(events, str):
         events = ast.literal_eval(events)
-    event = EventTable(
-        user_id=f"{events.get('user_id')}",
-        event_date=f"{events.get('event_date')}",
-        user_name=f"{events.get('user_name')}",
-        reason=f"{events.get('reason')}",
-        hours=f"{events.get('hours')}",
+
+    if isinstance(events, list):
+        response = []
+        with EventTable.batch_write() as batch:
+            for event_data in events:
+                response.append(batch.save(_generate_event(event_data)))
+        return
+
+    return json.dumps(_generate_event(events).save())
+
+
+def _generate_event(event_data):
+    return EventTable(
+        user_id=f"{event_data.get('user_id')}",
+        event_date=f"{event_data.get('event_date')}",
+        user_name=f"{event_data.get('user_name')}",
+        reason=f"{event_data.get('reason')}",
+        hours=f"{event_data.get('hours')}",
     )
-    return json.dumps(event.save())
 
 
 def delete_all_events_by_date(event_date):

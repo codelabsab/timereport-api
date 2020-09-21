@@ -128,7 +128,7 @@ def create_event_v2():
     Method
     POST    /events
     Create event
-    data: {"user_id":"foo01","user_name":"Foo Bar","reason":"sick","event_date":"2019-03-21","hours":8}
+    data: {"user_id":"foo01","user_name":"Foo Bar","reason":"sick","event_date":"2019-03-21","hours":8} OR list with same format data
     """
     return db_v2.create_event_v2(app.current_request.json_body)
 
