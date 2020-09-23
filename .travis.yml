@@ -16,7 +16,9 @@ notifications:
 
 stages:
   - name: Tests
+    if: type = push
   - name: Deploy to dev
+    if: type = push
   - name: Deploy to prod
     if: type = push AND branch = master
 
