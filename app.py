@@ -203,13 +203,3 @@ def delete_all_locks_by_date(event_date):
     Delete all locks on date
     """
     return db_v2.delete_all_locks_by_date(event_date)
-
-
-@app.route("/lock/users/{user_id}/{event_date}", methods=["GET"], cors=True)
-def get_lock(user_id, event_date):
-    """
-    :param user_id:
-    :param event_date:
-    :return:
-    """
-    return db_v2.get_locks_by_user_id_and_date(user_id=user_id, event_date=event_date)
