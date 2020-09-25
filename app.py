@@ -1,6 +1,6 @@
 import os
 from chalice import Chalice
-from chalicelib.lib import db_v1, db_v2
+from chalicelib.lib import db_v2
 from chalicelib.model.models import EventTable, LockTable
 import logging
 
@@ -203,65 +203,3 @@ def delete_all_locks_by_date(event_date):
     Delete all locks on date
     """
     return db_v2.delete_all_locks_by_date(event_date)
-
-
-##################################################
-#                                                #
-#      TODO: The following code is support for   #
-#            v1 api-calls and will be removed    #
-#                                                #
-##################################################
-
-
-@app.route("/event/users", methods=["GET"], cors=True)
-def get_user_ids():
-    return db_v2.list_users()
-
-
-@app.route("/event/users/{user_id}", methods=["GET"], cors=True)
-def get_events_by_user_id(user_id):
-    start_date = None
-    end_date = None
-    if app.current_request.query_params:
-        app.log.debug(f"Got request params: {app.current_request.query_params}")
-        start_date = app.current_request.query_params.get("startDate")
-        end_date = app.current_request.query_params.get("endDate")
-
-    return db_v1.get_id(user_id=user_id, start_date=start_date, end_date=end_date)
-
-
-@app.route("/event/users/{user_id}", methods=["POST"], cors=True)
-def create_event_v1(user_id):
-    """
-    :param user_id:
-    :return:
-    """
-    return db_v1.create_event_v1(app.current_request.json_body, user_id)
-
-
-@app.route("/event/users/{user_id}", methods=["DELETE"], cors=True)
-def delete_event_by_id(user_id):
-    """
-    :param user_id:
-    :return:
-    """
-    if app.current_request.query_params:
-        start_date = app.current_request.query_params.get("date")
-        app.log.info(f"delete event backend: date is {start_date} and id is {user_id}")
-        return db_v1.delete_event_v1(user_id, start_date)
-
-
-@app.route("/lock/users/{user_id}/{event_date}", methods=["GET"], cors=True)
-def get_lock(user_id, event_date):
-    """
-    :param user_id:
-    :param event_date:
-    :return:
-    """
-    return db_v2.get_locks_by_user_id_and_date(user_id=user_id, event_date=event_date)
-
-
-@app.route("/lock", methods=["POST"], cors=True)
-def create_lock():
-    db_v2.create_lock(app.current_request.json_body)
-    return app.current_request.json_body
