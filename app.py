@@ -1,11 +1,14 @@
 import os
 from chalice import Chalice
+from chalicelib.v1_routes import v1_routes
 from chalicelib.lib import db_v2
 from chalicelib.model.models import EventTable, LockTable
 import logging
 
 
 app = Chalice(app_name="timereport_backend")
+app.register_blueprint(v1_routes)
+
 app.debug = os.getenv("BACKEND_DEBUG", False)
 log_level = logging.DEBUG if app.debug else logging.INFO
 app.log.setLevel(log_level)
