@@ -1,5 +1,4 @@
 import requests
-from requests.api import request
 
 local_api = "http://localhost:8010"
 local_db = "http://localhost:8000"
@@ -199,3 +198,9 @@ def test_delete_all_locks_by_date():
     create_lock(lock)
     r = request_session.delete(f"{local_api}/v1/locks/dates/{date}")
     assert r.status_code == 200
+
+
+def test_unauthorized_request():
+    r = requests.get(f"{local_api}/v1/users")
+    assert r.status_code == 401
+    assert "Unauthorized" in r.text
