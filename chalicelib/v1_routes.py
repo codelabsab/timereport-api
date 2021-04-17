@@ -207,8 +207,8 @@ def create_lock():
     Create lock
     data: {"user_id":"foo01","event_date":"2019-02"}
     """
-    db_v2.create_lock(app.current_request.json_body)
-    return app.current_request.json_body
+    db_v2.create_lock(v1_routes.current_request.json_body)
+    return v1_routes.current_request.json_body
 
 
 @v1_routes.route("/v1/locks", methods=["GET"], cors=True, authorizer=api_key_auth)

@@ -46,12 +46,12 @@ if check_local_api.status_code != 200:
 
 
 def create_event(event: dict):
-    r = request_session.post(f"{local_api}/events", json=event)
+    r = request_session.post(f"{local_api}/v1/events", json=event)
     return r
 
 
 def create_lock(lock: dict):
-    r = request_session.post(f"{local_api}/locks", json=lock)
+    r = request_session.post(f"{local_api}/v1/locks", json=lock)
     return r
 
 
