@@ -92,13 +92,13 @@ make clean
 ```
 
 ## Deployment
-Deployment to dev and prod is done automatically
+Deployment to dev and prod is done automatically via github actions
 
 ### DEV
-Deploy to dev will happen when a push/merge even happens on master branch
+See [dev.yml](.github/workflows/dev.yml) for details.
 
 ### PRODUCTION
-Deploy to production will happen if a tag is created on the master branch
+See [prod.yml](.github/workflows/prod.yml) for details.
 
 ### Manually
 __note__: This requires that you have setup the credentials for AWS
@@ -112,6 +112,7 @@ __note__: This requires that you have setup the credentials for AWS
 
 #### prerequisite
 Install the packages (use pipenv)
-__IMPORTANT!__ : Make sure you have started your local development environment
-Run pytest:
-`pytest -v tests`
+```
+# make run
+# pytest -v tests
+```
