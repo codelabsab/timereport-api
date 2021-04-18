@@ -17,8 +17,6 @@ notifications:
 stages:
   - name: Tests
     if: type = push
-  - name: Deploy to dev
-    if: type = push
   - name: Deploy to prod
     if: type = push AND branch = master
 
@@ -31,9 +29,6 @@ jobs:
         - make ci-server
         - sleep 5
         - pytest
-    - stage: Deploy to dev
-      script:
-      - chalice deploy --stage dev
     - stage: Deploy to prod
       on:
         branch: master
