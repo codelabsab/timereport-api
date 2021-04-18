@@ -27,6 +27,13 @@ jobs:
         make ci-server
         sleep 5
         pytest -v
+      env:
+        # pynamodb needs credentails to be set, even if they're not used in local mode 🤷‍♂️
+        AWS_ACCESS_KEY_ID: "fake ID"
+        AWS_SECRET_ACCESS_KEY: "fake secret"
     - name: Deploy dev
       run: chalice deploy --stage dev
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
