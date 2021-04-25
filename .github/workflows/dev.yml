@@ -34,7 +34,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: "fake secret"
     - name: Deploy dev
       run: |
-        make config API_KEY=$CHALICE_API_KEY
+        make config CHALICE_API_KEY=$CHALICE_API_KEY
         make deploy CHALICE_ENV="dev"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
