@@ -72,7 +72,7 @@ DELETE /locks/dates/<date>     # delete all locks by date
 
 The API v1 routes requires authentication via the `Authorization` header.
 
-Default API key is set via `API_KEY` variable in the [Makefile](Makefile).
+API key is set via `CHALICE_API_KEY` variable in the [Makefile](Makefile).
 
 Example request via `httpie`:
 ```
