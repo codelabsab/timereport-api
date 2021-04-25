@@ -3,8 +3,11 @@ VERSION=0.0.1
 
 DB_PORT = 8000
 API_PORT = 8010
+API_KEY = "development"
+CHALICE_ENV = "dev"
 
 export DB_HOST = http://localhost:$(DB_PORT)
+export CHALICE_API_KEY = $(API_KEY)
 
 .PHONY: pull run stop restart rm
 
@@ -14,6 +17,8 @@ pull:
 dynamo:
 	docker run --rm --name dynamodb-local -d -p $(DB_PORT):$(DB_PORT) amazon/dynamodb-local
 
+config:
+	sed "s/<CHALICE_API_KEY>/$(CHALICE_API_KEY)/" .chalice/config.json.template > .chalice/config.json
 run:
 	docker run --rm --name dynamodb-local -d -p $(DB_PORT):$(DB_PORT) amazon/dynamodb-local
 	# Wait for local DB to start
@@ -32,6 +37,8 @@ chalice:
 ci-server:
 	sh -c "chalice local --port $(API_PORT) --no-autoreload &"
 
+deploy:
+	chalice deploy --stage $(CHALICE_ENV)
 
 default: run
 clean: stop
