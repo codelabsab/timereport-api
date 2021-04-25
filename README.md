@@ -68,21 +68,25 @@ DELETE /locks/dates/<date>     # delete all locks by date
 
 ## Local development
 
+### Authentication
+
+The API v1 routes requires authentication via the `Authorization` header.
+
+API key is set via `CHALICE_API_KEY` variable in the [Makefile](Makefile).
+
+Example request via `httpie`:
+```
+# http localhost:8010/v1/table-names 'Authorization: development'
+```
+
 ### prerequisite
 - Docker (to run amazon/dynamodb-local)
 - packages in requirements.txt OR `pipenv install`
-- edit .chalice/config.json env variables and add:
-```json
-  "environment_variables": {
-    "AWS_ACCESS_KEY_ID": "dummy",
-    "AWS_SECRET_ACCESS_KEY": "dummy"
-  },
-```
 
-To start a local dynamodb and chalice:
+To start a local dynamodb, setup config and start chalice:
 ```
-$ make dynamo
-$ make chalice
+$ make config
+$ make run
 ```
 Now you should be able to try the API on http://localhost:8010 or run the tests `pipenv run pytest`
 

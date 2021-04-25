@@ -6,7 +6,7 @@ from chalicelib.lib import db_v2
 
 v1_routes = Blueprint(__name__)
 
-api_key = environ.get("CHALICE_API_KEY", "development")
+api_key = environ["CHALICE_API_KEY"]
 
 
 @v1_routes.authorizer()
