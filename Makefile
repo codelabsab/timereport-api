@@ -6,7 +6,6 @@ API_PORT = 8010
 CHALICE_API_KEY ?= development
 CHALICE_ENV = "dev"
 
-export DB_HOST = http://localhost:$(DB_PORT)
 
 .PHONY: pull run stop restart rm
 
