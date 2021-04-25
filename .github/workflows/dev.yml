@@ -22,7 +22,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
     - name: Run Tests
       run: |
-        make dynamo
+        make dynamo DB_PORT=8000
         sleep 5
         make config
         make ci-server
@@ -32,6 +32,7 @@ jobs:
         # pynamodb needs credentails to be set, even if they're not used in local mode 🤷‍♂️
         AWS_ACCESS_KEY_ID: "fake ID"
         AWS_SECRET_ACCESS_KEY: "fake secret"
+        DB_HOST: "http://localhost:8000"
     - name: Deploy dev
       run: |
         make config CHALICE_API_KEY=$CHALICE_API_KEY
