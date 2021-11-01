@@ -34,11 +34,6 @@ lock_data = [
 request_session = requests.Session()
 request_session.headers = {"Authorization": "development"}
 
-# sanity check to see that we have some certainty that this test will execute
-# on local environment
-check_local_db = requests.get(f"{local_db}/shell/")
-if check_local_db.status_code != 200:
-    raise Exception("Local DB check failed")
 
 check_local_api = request_session.get(f"{local_api}/v1/table-names")
 if check_local_api.status_code != 200:
