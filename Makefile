@@ -35,5 +35,8 @@ chalice:
 ci-server:
 	sh -c "chalice local --port $(API_PORT) --no-autoreload &"
 
+deploy:
+	chalice deploy --stage $(CHALICE_ENV)
+
 default: run
 clean: stop

@@ -81,7 +81,7 @@ Example request via `httpie`:
 
 ### prerequisite
 - Docker (to run amazon/dynamodb-local)
-- packages in Pipfile installed (use pipenv to setup)
+- packages in requirements.txt OR `pipenv install`
 
 To start a local dynamodb, setup config and start chalice:
 ```
