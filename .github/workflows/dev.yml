@@ -22,8 +22,7 @@ jobs:
           make dynamo DB_PORT=8000
           sleep 5
           make config
-          pipenv shell
-          make ci-server
+          pipenv run sh -c "chalice local --port 8010 --no-autoreload &"
           sleep 5
           pipenv run pytest -v
         env:
