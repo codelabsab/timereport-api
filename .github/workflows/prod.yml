@@ -24,7 +24,7 @@ jobs:
       - name: Deploy prod
         run: |
           make config CHALICE_API_KEY=$CHALICE_API_KEY
-          pipenv run chalice deploy --dev
+          pipenv run chalice deploy --stage prod
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
