@@ -22,6 +22,7 @@ jobs:
           make dynamo DB_PORT=8000
           sleep 5
           make config
+          pipenv shell
           make ci-server
           sleep 5
           pipenv run pytest -v
