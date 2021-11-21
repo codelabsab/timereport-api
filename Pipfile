@@ -8,7 +8,7 @@ black = "*"
 
 [packages]
 pynamodb = "*"
-chalice = "*"
+chalice = "==1.22.3"
 boto3 = "*"
 botocore = "*"
 pytest = "*"
