@@ -26,45 +26,6 @@ An API for timereport
 ]
 ```
 
-## RESTful resources
-
-Resources exposed through the api
-
-Expects `Content-Type: appplication/json`
-
-##### Tables
-```
-GET    /table-names                   # list dynamo tables
-```
-
-##### User context
-```
-GET    /users                         # list users
-GET    /users/<user_id>               # get user
-GET    /users/<user_id>/events        # list all user events
-DELETE /users/<user_id>/events        # delete all user events
-GET    /users/<user_id>/locks         # list all user locks
-DELETE /users/<user_id>/locks         # delete all user locks
-DELETE /users/<user_id>/locks/<date>  # delete user lock by date
-GET    /users/<user_id>/events/<date> # get user event by date
-DELETE /users/<user_id>/events/<date> # delete user event by date
-```
-
-##### Event context
-```
-GET    /events                 # list events
-POST   /events                 # create event
-GET    /events/dates/<date>    # get all events by date
-DELETE /events/dates/<date>    # delete all events by date
-```
-
-##### Lock context
-```
-GET    /locks                  # list locks
-POST   /locks                  # create lock
-GET    /locks/dates/<date>     # list all locks by date
-DELETE /locks/dates/<date>     # delete all locks by date
-```
 
 ## Local development
 
@@ -84,6 +45,9 @@ Example request via `httpie`:
 - packages in requirements.txt OR `pipenv install`
 
 To start a local dynamodb, setup config and start chalice:
+
+1. Set the env variable `DB_HOST` to `http://localhost:8000`
+2. Create config and start chalice
 ```
 $ make config
 $ make run
